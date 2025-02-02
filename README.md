@@ -12,9 +12,7 @@ This repository contains the backend API for a video-sharing platform inspired b
 - [API Endpoints](#api-endpoints)
 - [Data Models](#data-models)
 - [Testing](#testing)
-- [Deployment](#deployment) (Optional - Add if you have deployment info)
-- [Contributing](#contributing) (Optional)
-- [License](#license) (Optional)
+
 
 ## Features
 
