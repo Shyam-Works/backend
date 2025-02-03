@@ -1,35 +1,20 @@
-import dotenv from "dotenv"
+import dotenv from "dotenv";
 import connectDB from "./db/index.js";
 import { app } from "./app.js";
 
-dotenv.configDotenv({
-    path: './.env'
-})
-connectDB()
-.then(()=>{
-    app.listen(process.env.PORT || 8000,()=>{
-        console.log(`server is running at port: ${process.env.PORT}`)
-    });
-})
-.catch((error)=>{
-    console.log("mongodb connection fail", error)
-})
+dotenv.config({ path: "./.env" }); // Correct dotenv usage
 
+const startServer = async () => {
+    try {
+        await connectDB(); // Connect to MongoDB
+        console.log("Database connected successfully");
+    } catch (error) {
+        console.error("MongoDB connection failed:", error);
+        process.exit(1);
+    }
+};
 
-// import express from "express";
-// const app = express()
-// (async ()=>{
-//     try{    
-//         await mongoose.connect(`${process.env.MONGODB_URI}/${DB_NAME}`)
-//         app.on("error", (error)=>{
-//             console.log("ERROR ", error);
-//             throw error
-//         })
-//         app.listen(process.env.PORT, ()=>{
-//             console.log(`app is listing on port ${process.env.PORT}`);
-//         })
-//     }catch(error){
-//         console.log("error",error)
-//         throw err
-//     }
-// }) ()
+startServer();
+
+// Instead of `app.listen()`, export the app for Vercel
+export default app;
